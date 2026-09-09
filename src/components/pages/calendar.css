@@ -1,0 +1,284 @@
+.calendario {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-dia-nombre {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    padding: 6px 0;
+}
+
+.cal-dia {
+    min-height: 84px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+
+.cal-dia:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+}
+
+.cal-dia:focus-visible,
+.cal-flecha:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Días del mes anterior/siguiente que rellenan la grilla */
+.cal-fuera {
+    opacity: 0.35;
+}
+
+.cal-numero {
+    min-width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+/* Resaltado del día actual */
+.cal-hoy .cal-numero {
+    background: var(--accent);
+    color: #fff;
+}
+
+.cal-eventos {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cal-evento {
+    max-width: 100%;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--accent-bg);
+    border-left: 2px solid var(--accent);
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-mas {
+    font-size: 11px;
+    color: var(--text);
+}
+
+/* Flechas para cambiar de mes, debajo de la grilla */
+.cal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.cal-nav-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+.cal-flecha {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-h);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+
+.cal-flecha:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+}
+
+/* Modal para agregar y borrar eventos */
+.cal-modal-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.cal-modal {
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+
+.cal-modal-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.cal-modal h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-h);
+}
+
+.cal-cerrar {
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cal-cerrar:hover {
+    color: var(--text-h);
+}
+
+.cal-form {
+    display: flex;
+    gap: 8px;
+}
+
+.cal-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--code-bg);
+    color: var(--text-h);
+    font: inherit;
+    font-size: 14px;
+}
+
+.cal-form input:focus {
+    outline: 2px solid var(--accent-border);
+    border-color: var(--accent);
+}
+
+.cal-form button[type="submit"] {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cal-form button[type="submit"]:hover {
+    filter: brightness(1.1);
+}
+
+.cal-lista {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.cal-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--accent-bg);
+    font-size: 14px;
+}
+
+.cal-lista-texto {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-borrar {
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cal-borrar:hover {
+    color: var(--text-h);
+}
+
+.cal-vacio {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--text);
+}
+
+@media (max-width: 640px) {
+    .cal-dia {
+        min-height: 60px;
+        padding: 4px;
+    }
+
+    .cal-evento {
+        font-size: 10px;
+    }
+}
