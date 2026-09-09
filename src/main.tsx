@@ -5,8 +5,6 @@ import Calendar from './components/pages/calendar'
 import EventosPanel from './components/pages/eventos'
 import EventosSemanales from './components/pages/semanal'
 import Horario from './components/pages/horario'
-import Semanal from './components/pages/weekly'
-import Tareas from './components/pages/task'
 import Contactos from './components/pages/contactos'
 import Nav, { type Pagina } from './components/nav'
 import { BarraSesion, SesionProvider } from './sesion'
@@ -34,8 +32,6 @@ function Aplicacion() {
           </>
         )}
         {pagina === 'horario' && <Horario />}
-        {pagina === 'semanal' && <Semanal />}
-        {pagina === 'tareas' && <Tareas />}
         {pagina === 'contactos' && <Contactos />}
       </div>
     </>

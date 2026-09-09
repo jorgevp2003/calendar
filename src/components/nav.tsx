@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-export type Pagina = "calendario" | "horario" | "semanal" | "tareas" | "contactos";
+export type Pagina = "calendario" | "horario" | "contactos";
 
 const OPCIONES: { id: Pagina; nombre: string }[] = [
     { id: "calendario", nombre: "Calendario" },
     { id: "horario", nombre: "Horario" },
-    { id: "semanal", nombre: "Semanal" },
-    { id: "tareas", nombre: "Tareas" },
     { id: "contactos", nombre: "Contactos" },
 ];
 
