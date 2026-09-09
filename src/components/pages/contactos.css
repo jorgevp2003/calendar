@@ -1,0 +1,108 @@
+.contactos {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 8px 16px 40px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.contactos h2 {
+    font-size: 20px;
+    margin: 0 0 12px;
+}
+
+.contactos-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.contactos-form input {
+    flex: 1;
+    min-width: 140px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--code-bg);
+    color: var(--text-h);
+    font: inherit;
+    font-size: 14px;
+}
+
+.contactos-form input:focus {
+    outline: 2px solid var(--accent-border);
+    border-color: var(--accent);
+}
+
+.contactos-form button[type="submit"] {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.contactos-form button[type="submit"]:hover {
+    filter: brightness(1.1);
+}
+
+.contactos-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contactos-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.contactos-nombre {
+    flex-shrink: 0;
+    min-width: 140px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+.contactos-dato {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contactos-borrar {
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.contactos-borrar:hover {
+    color: var(--evento-rojo);
+}
+
+.contactos-vacio {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text);
+}

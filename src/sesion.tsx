@@ -79,32 +79,46 @@ export function useSesion(): Sesion {
     return sesion;
 }
 
-// Lista de elementos (eventos, deberes, semanales) que se guarda siempre en
-// localStorage y, con la sesión iniciada, también en Firestore: se carga al
-// iniciar sesión y se guarda en cada cambio.
+// Solo esta cuenta verá los datos; cualquier otra verá las páginas vacías.
+// Se configura en .env (VITE_OWNER_EMAIL).
+const EMAIL_PROPIETARIO = (import.meta.env.VITE_OWNER_EMAIL ?? "").toLowerCase();
+
+// Lista de elementos (eventos, deberes, semanales…) que se guarda siempre en
+// localStorage y, con la sesión del propietario iniciada, también en Firestore:
+// se carga al iniciar sesión y se guarda en cada cambio.
 export function useListaSincronizada<T>(
     campo: string,
     claveLocal: string,
     validar: (dato: unknown) => T[],
 ): [T[], Dispatch<SetStateAction<T[]>>] {
     const { usuario } = useSesion();
-    const [lista, setLista] = useState<T[]>(() =>
+
+    // Si la sesión no es la del propietario, la lista se ve vacía y no se
+    // guarda nada (ni en localStorage ni en Firebase)
+    const esPropietario =
+        EMAIL_PROPIETARIO !== "" &&
+        (usuario?.email ?? "").toLowerCase() === EMAIL_PROPIETARIO;
+
+    const [listaInterna, setListaInterna] = useState<T[]>(() =>
         cargarLocal(claveLocal, validar),
     );
     // Marca si la lista del usuario ya cargó de la nube; evita guardar en
     // Firestore antes de cargar y pisar los datos remotos con los locales
     const nubeLista = useRef(false);
 
+    // Lo que ven los componentes: vacío para quien no es el propietario
+    const lista = esPropietario ? listaInterna : [];
+
     // Al iniciar sesión: cargar la lista guardada del usuario
     useEffect(() => {
         nubeLista.current = false;
-        if (!usuario || !db) return;
+        if (!usuario || !db || !esPropietario) return;
         let cancelado = false;
         getDoc(doc(db, "usuarios", usuario.uid))
             .then((snap) => {
                 if (cancelado) return;
                 nubeLista.current = true;
-                setLista(validar(snap.data()?.[campo]));
+                setListaInterna(validar(snap.data()?.[campo]));
             })
             .catch((error) =>
                 console.error("Error al cargar de Firebase", error),
@@ -112,22 +126,23 @@ export function useListaSincronizada<T>(
         return () => {
             cancelado = true;
         };
-    }, [usuario, campo, validar]);
+    }, [usuario, esPropietario, campo, validar]);
 
     // En cada cambio: guardar en localStorage, y en la nube si ya cargó
     useEffect(() => {
-        guardarLocal(claveLocal, lista);
+        if (!esPropietario) return;
+        guardarLocal(claveLocal, listaInterna);
         if (!usuario || !db || !nubeLista.current) return;
         setDoc(
             doc(db, "usuarios", usuario.uid),
-            { [campo]: lista },
+            { [campo]: listaInterna },
             { merge: true },
         ).catch((error) =>
             console.error("Error al guardar en Firebase", error),
         );
-    }, [lista, usuario, campo, claveLocal]);
+    }, [listaInterna, usuario, esPropietario, campo, claveLocal]);
 
-    return [lista, setLista];
+    return [lista, setListaInterna];
 }
 
 function cargarLocal<T>(clave: string, validar: (dato: unknown) => T[]): T[] {
