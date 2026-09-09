@@ -25,3 +25,8 @@ export const firebaseActivo = Boolean(
 export const app = firebaseActivo ? initializeApp(firebaseConfig) : null;
 export const auth = app ? getAuth(app) : null;
 export const db = app ? getFirestore(app) : null;
+
+console.log("Firebase activo:", firebaseActivo);
+console.log("Firebase app:", app);
+console.log("Firebase auth:", auth);
+console.log("Firebase db:", db);
