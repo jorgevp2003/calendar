@@ -174,6 +174,27 @@ function Calendar() {
 
     return (
         <section className="calendario">
+            <nav className="cal-nav">
+                <button
+                    type="button"
+                    className="cal-flecha"
+                    onClick={mesAnterior}
+                    aria-label="Mes anterior"
+                >
+                    ←
+                </button>
+                <span className="cal-nav-titulo">
+                    {MESES[visible.getMonth()]} {visible.getFullYear()}
+                </span>
+                <button
+                    type="button"
+                    className="cal-flecha"
+                    onClick={mesSiguiente}
+                    aria-label="Mes siguiente"
+                >
+                    →
+                </button>
+            </nav>
             <div className="cal-grid">
                 {DIAS.map((nombre) => (
                     <div key={nombre} className="cal-dia-nombre">
@@ -229,27 +250,7 @@ function Calendar() {
             </div>
 
             {/* Flechas para cambiar de mes, debajo del calendario */}
-            <nav className="cal-nav">
-                <button
-                    type="button"
-                    className="cal-flecha"
-                    onClick={mesAnterior}
-                    aria-label="Mes anterior"
-                >
-                    ←
-                </button>
-                <span className="cal-nav-titulo">
-                    {MESES[visible.getMonth()]} {visible.getFullYear()}
-                </span>
-                <button
-                    type="button"
-                    className="cal-flecha"
-                    onClick={mesSiguiente}
-                    aria-label="Mes siguiente"
-                >
-                    →
-                </button>
-            </nav>
+            
 
             {seleccionado && (
                 <div

@@ -16,7 +16,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
-
+documentation.txt
 .claude/settings.local.json
 
 # Editor directories and files
