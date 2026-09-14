@@ -50,18 +50,29 @@
     min-height: 44px;
     padding: 6px 8px;
     box-sizing: border-box;
-    border: 1px solid var(--border);
+    border: 1px solid var(--celda-borde, var(--border));
     border-radius: 6px;
-    background: transparent;
+    background: var(--celda-bg, transparent);
     color: var(--text-h);
     font: inherit;
     font-size: 13px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
+
+.horario-celda[data-color="0"] { --celda-bg: var(--asig-0-bg); --celda-borde: var(--asig-0-borde); }
+.horario-celda[data-color="1"] { --celda-bg: var(--asig-1-bg); --celda-borde: var(--asig-1-borde); }
+.horario-celda[data-color="2"] { --celda-bg: var(--asig-2-bg); --celda-borde: var(--asig-2-borde); }
+.horario-celda[data-color="3"] { --celda-bg: var(--asig-3-bg); --celda-borde: var(--asig-3-borde); }
+.horario-celda[data-color="4"] { --celda-bg: var(--asig-4-bg); --celda-borde: var(--asig-4-borde); }
+.horario-celda[data-color="5"] { --celda-bg: var(--asig-5-bg); --celda-borde: var(--asig-5-borde); }
+.horario-celda[data-color="6"] { --celda-bg: var(--asig-6-bg); --celda-borde: var(--asig-6-borde); }
+.horario-celda[data-color="7"] { --celda-bg: var(--asig-7-bg); --celda-borde: var(--asig-7-borde); }
 
 .horario-celda:focus {
     outline: 2px solid var(--accent-border);
     border-color: var(--accent);
-    background: var(--accent-bg);
+    background: var(--celda-bg, var(--accent-bg));
 }
 
 @media (max-width: 640px) {

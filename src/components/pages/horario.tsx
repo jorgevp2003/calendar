@@ -13,6 +13,28 @@ function aHorario(dato: unknown): string[] {
     );
 }
 
+// Normaliza el nombre de la asignatura para que variantes de escritura compartan color
+function normalizar(texto: string): string {
+    return texto
+        .trim()
+        .replace(/\s+/g, " ")
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .toLowerCase();
+}
+
+// Color determinista (0-7) según el nombre; cadena vacía o espacios → null (sin color)
+function colorAsignatura(texto: string): number | null {
+    const nombre = normalizar(texto);
+    if (nombre === "") return null;
+    let hash = 0x811c9dc5;
+    for (let i = 0; i < nombre.length; i++) {
+        hash ^= nombre.charCodeAt(i);
+        hash = Math.imul(hash, 0x01000193);
+    }
+    return (hash >>> 0) % 8;
+}
+
 function Horario() {
     const [casillas, setCasillas] = useListaSincronizada(
         "horario",
@@ -44,12 +66,16 @@ function Horario() {
                         <div className="horario-hora">{fila + 1}</div>
                         {DIAS.map((dia, col) => {
                             const indice = fila * DIAS.length + col;
+                            const valor = casillas[indice] ?? "";
                             return (
                                 <input
                                     key={dia}
                                     type="text"
                                     className="horario-celda"
-                                    value={casillas[indice] ?? ""}
+                                    value={valor}
+                                    data-color={
+                                        colorAsignatura(valor) ?? undefined
+                                    }
                                     onChange={(e) =>
                                         cambiarCasilla(indice, e.target.value)
                                     }

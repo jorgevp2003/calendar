@@ -18,6 +18,23 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
+  --asig-0-bg: #ffe3e3;
+  --asig-0-borde: #f2a9a9;
+  --asig-1-bg: #ffe9d4;
+  --asig-1-borde: #f2b380;
+  --asig-2-bg: #fdf2c2;
+  --asig-2-borde: #e0c055;
+  --asig-3-bg: #d9f2dd;
+  --asig-3-borde: #7cc98f;
+  --asig-4-bg: #d4f0ee;
+  --asig-4-borde: #6fc4bd;
+  --asig-5-bg: #dce9fd;
+  --asig-5-borde: #8fb5f0;
+  --asig-6-bg: #e9e2fb;
+  --asig-6-borde: #a48fe8;
+  --asig-7-bg: #fbe2f0;
+  --asig-7-borde: #e391c3;
+
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -46,6 +63,22 @@
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --asig-0-bg: #3b2124;
+    --asig-0-borde: #a04a4f;
+    --asig-1-bg: #3a2919;
+    --asig-1-borde: #a06b38;
+    --asig-2-bg: #37301a;
+    --asig-2-borde: #a58f3c;
+    --asig-3-bg: #1d332a;
+    --asig-3-borde: #4f8a67;
+    --asig-4-bg: #1a3230;
+    --asig-4-borde: #4b8a84;
+    --asig-5-bg: #1f2c44;
+    --asig-5-borde: #5a7fb5;
+    --asig-6-bg: #2d2547;
+    --asig-6-borde: #7a68b5;
+    --asig-7-bg: #3a2438;
+    --asig-7-borde: #a05f96;
   }
 
   #social .button-icon {
