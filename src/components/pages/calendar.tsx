@@ -18,7 +18,7 @@ const MESES = [
 ];
 
 // Empieza en domingo para coincidir con getDay() (0 = domingo)
-const DIAS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+const DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb","Dom"];
 
 interface day {
     date: Date;
@@ -38,12 +38,13 @@ interface evento {
 function getWeeks(year: number, month: number): week[] {
     // 1. Calcular cuántas semanas necesita este mes
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstWeekday = new Date(year, month, 1).getDay();
+    // Día de la semana del día 1, pero con lunes = 0 (getDay() devuelve 0 para domingo)
+    const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
     const numWeeks = Math.ceil((firstWeekday + daysInMonth) / 7);
 
-    // 2. Dónde empezar a contar (el domingo de la semana del día 1)
+    // 2. Dónde empezar a contar (el lunes de la semana del día 1)
     const start = new Date(year, month, 1);
-    start.setDate(2 - start.getDay());
+    start.setDate(1 - firstWeekday);
 
     // 3. Crear exactamente numWeeks semanas, cada una con 7 días
     const weeks: week[] = [];
