@@ -42,8 +42,8 @@ function getWeeks(year: number, month: number): week[] {
     const numWeeks = Math.ceil((firstWeekday + daysInMonth) / 7);
 
     // 2. Dónde empezar a contar (el domingo de la semana del día 1)
-    const start = new Date(year, month, 1);
-    start.setDate(1 - start.getDay());
+    const start = new Date(year, month, 2);
+    start.setDate(2 - start.getDay());
 
     // 3. Crear exactamente numWeeks semanas, cada una con 7 días
     const weeks: week[] = [];
