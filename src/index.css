@@ -11,6 +11,8 @@
   --evento-rojo: #e5484d;
   --evento-verde: #30a46c;
   --evento-amarillo: #f0b429;
+  --examen: #e5484d;
+  --examen-bg: rgba(229, 72, 77, 0.12);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -35,7 +37,7 @@
   --asig-7-bg: #fbe2f0;
   --asig-7-borde: #e391c3;
 
-  font: 18px/145% var(--sans);
+  font: 20px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -46,7 +48,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -61,6 +63,8 @@
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
+    --examen: #ff6369;
+    --examen-bg: rgba(255, 99, 105, 0.16);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
     --asig-0-bg: #3b2124;
@@ -154,7 +158,7 @@ body {
   border-radius: 8px;
   background: transparent;
   color: var(--text-h);
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1;
   cursor: pointer;
 }
@@ -196,7 +200,7 @@ body {
   background: transparent;
   color: var(--text);
   font: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
 }
@@ -221,7 +225,7 @@ body {
 
 .pagina-vacia p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text);
 }
 
@@ -239,7 +243,7 @@ body {
 }
 
 .sesion-nombre {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-h);
 }
 
@@ -250,7 +254,7 @@ body {
   background: transparent;
   color: var(--text-h);
   font: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 
@@ -267,21 +271,21 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: 3.5rem;
   letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
+    font-size: 2.25rem;
     margin: 20px 0;
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 }
 p {
@@ -297,7 +301,7 @@ code,
 }
 
 code {
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);

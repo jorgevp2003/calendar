@@ -14,7 +14,7 @@
 
 .cal-dia-nombre {
     text-align: center;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -23,7 +23,7 @@
 }
 
 .cal-dia {
-    min-height: 84px;
+    min-height: 4.5rem;
     padding: 6px;
     display: flex;
     flex-direction: column;
@@ -58,13 +58,13 @@
 }
 
 .cal-numero {
-    min-width: 24px;
-    height: 24px;
+    min-width: 1.25rem;
+    height: 1.25rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 999px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-h);
 }
@@ -89,15 +89,23 @@
     border-radius: 4px;
     background: var(--accent-bg);
     border-left: 2px solid var(--accent);
-    font-size: 11px;
+    font-size: 0.6875rem;
     line-height: 1.4;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* Evento de tipo examen */
+.cal-evento-examen {
+    background: var(--examen);
+    border-left-color: var(--examen);
+    color: #fff;
+    font-weight: 600;
+}
+
 .cal-mas {
-    font-size: 11px;
+    font-size: 0.6875rem;
     color: var(--text);
 }
 
@@ -110,19 +118,19 @@
 }
 
 .cal-nav-titulo {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
     color: var(--text-h);
 }
 
 .cal-flecha {
-    width: 44px;
-    height: 44px;
+    width: 2.25rem;
+    height: 2.25rem;
     border: 1px solid var(--border);
     border-radius: 10px;
     background: transparent;
     color: var(--text-h);
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1;
     cursor: pointer;
     transition:
@@ -149,7 +157,7 @@
 
 .cal-modal {
     width: 100%;
-    max-width: 380px;
+    max-width: 27.5rem;
     padding: 20px;
     background: var(--bg);
     border: 1px solid var(--border);
@@ -168,7 +176,7 @@
 
 .cal-modal h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--text-h);
 }
 
@@ -176,7 +184,7 @@
     border: none;
     background: none;
     color: var(--text);
-    font-size: 22px;
+    font-size: 1.375rem;
     line-height: 1;
     cursor: pointer;
 }
@@ -187,19 +195,21 @@
 
 .cal-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
 .cal-form input {
     flex: 1;
     min-width: 0;
+    order: 1;
     padding: 8px 10px;
     border: 1px solid var(--border);
     border-radius: 8px;
     background: var(--code-bg);
     color: var(--text-h);
     font: inherit;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .cal-form input:focus {
@@ -207,14 +217,49 @@
     border-color: var(--accent);
 }
 
+/* Control segmentado Tarea/Examen del formulario: en su propia línea,
+   debajo del input y del botón de agregar */
+.cal-tipo {
+    display: flex;
+    order: 3;
+    flex-basis: 100%;
+}
+
+.cal-tipo-btn {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.cal-tipo-btn:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.cal-tipo-btn:last-child {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.cal-tipo-btn-activo {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
 .cal-form button[type="submit"] {
+    order: 2;
     padding: 8px 14px;
     border: none;
     border-radius: 8px;
     background: var(--accent);
     color: #fff;
     font: inherit;
-    font-size: 14px;
+    font-size: 0.875rem;
     cursor: pointer;
 }
 
@@ -241,7 +286,23 @@
     padding: 6px 10px;
     border-radius: 8px;
     background: var(--accent-bg);
-    font-size: 14px;
+    font-size: 0.875rem;
+}
+
+/* Examen en la lista del modal: fondo rojo suave y punto de color
+   (el texto vuelve al normal: el blanco es solo para los chips sólidos) */
+.cal-lista li.cal-evento-examen {
+    background: var(--examen-bg);
+    color: var(--text-h);
+}
+
+.cal-lista li.cal-evento-examen::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--examen);
 }
 
 .cal-lista-texto {
@@ -257,7 +318,7 @@
     border: none;
     background: none;
     color: var(--text);
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1;
     cursor: pointer;
 }
@@ -268,17 +329,17 @@
 
 .cal-vacio {
     margin: 12px 0 0;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--text);
 }
 
 @media (max-width: 640px) {
     .cal-dia {
-        min-height: 60px;
+        min-height: 3.75rem;
         padding: 4px;
     }
 
     .cal-evento {
-        font-size: 10px;
+        font-size: 0.625rem;
     }
 }

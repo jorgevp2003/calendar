@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import Calendar from './components/pages/calendar'
 import EventosPanel from './components/pages/eventos'
-import EventosSemanales from './components/pages/semanal'
 import Horario from './components/pages/horario'
 import Contactos from './components/pages/contactos'
 import Nav, { type Pagina } from './components/nav'
@@ -24,7 +23,6 @@ function Aplicacion() {
           <>
             <main className="layout-principal">
               <Calendar />
-              <EventosSemanales />
             </main>
             <aside className="layout-lateral">
               <EventosPanel />

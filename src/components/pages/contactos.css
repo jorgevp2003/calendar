@@ -8,7 +8,7 @@
 }
 
 .contactos h2 {
-    font-size: 20px;
+    font-size: 1.25rem;
     margin: 0 0 12px;
 }
 
@@ -28,7 +28,7 @@
     background: var(--code-bg);
     color: var(--text-h);
     font: inherit;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .contactos-form input:focus {
@@ -43,7 +43,7 @@
     background: var(--accent);
     color: #fff;
     font: inherit;
-    font-size: 14px;
+    font-size: 0.875rem;
     cursor: pointer;
 }
 
@@ -72,7 +72,7 @@
 .contactos-nombre {
     flex-shrink: 0;
     min-width: 140px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-h);
 }
@@ -80,7 +80,7 @@
 .contactos-dato {
     flex: 1;
     min-width: 0;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--text);
     white-space: nowrap;
     overflow: hidden;
@@ -92,7 +92,7 @@
     border: none;
     background: none;
     color: var(--text);
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1;
     cursor: pointer;
 }
@@ -103,6 +103,6 @@
 
 .contactos-vacio {
     margin: 0;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--text);
 }

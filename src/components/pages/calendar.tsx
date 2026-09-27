@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import "./calendar.css";
 import { useListaSincronizada } from "../../sesion";
+import { aCalendario, claveDe, type tipoTarea } from "../../tipos-calendario";
+import { Proximas } from "./proximas";
 
 const MESES = [
     "Enero",
@@ -27,12 +29,6 @@ interface day {
 
 interface week {
     days: day[];
-}
-
-interface evento {
-    id: string;
-    texto: string;
-    fecha: string; // clave "YYYY-MM-DD" del día al que pertenece
 }
 
 function getWeeks(year: number, month: number): week[] {
@@ -64,48 +60,12 @@ function getWeeks(year: number, month: number): week[] {
     return weeks;
 }
 
-// Clave "YYYY-MM-DD" en horario local (sin pasar por UTC)
-function claveDe(date: Date): string {
-    const mes = String(date.getMonth() + 1).padStart(2, "0");
-    const dia = String(date.getDate()).padStart(2, "0");
-    return `${date.getFullYear()}-${mes}-${dia}`;
-}
-
 function esMismoDia(a: Date, b: Date): boolean {
     return (
         a.getFullYear() === b.getFullYear() &&
         a.getMonth() === b.getMonth() &&
         a.getDate() === b.getDate()
     );
-}
-
-// Valida la lista de eventos; acepta también el formato viejo agrupado por fecha
-function aCalendario(dato: unknown): evento[] {
-    if (Array.isArray(dato)) {
-        return dato.map((d) => {
-            const ev = (d ?? {}) as Partial<evento>;
-            return {
-                id: typeof ev.id === "string" ? ev.id : crypto.randomUUID(),
-                texto: typeof ev.texto === "string" ? ev.texto : "",
-                fecha: typeof ev.fecha === "string" ? ev.fecha : "",
-            };
-        });
-    }
-
-    if (dato && typeof dato === "object") {
-        return Object.entries(dato).flatMap(([fecha, lista]) =>
-            (Array.isArray(lista) ? lista : []).map((d) => {
-                const ev = (d ?? {}) as Partial<evento>;
-                return {
-                    id: typeof ev.id === "string" ? ev.id : crypto.randomUUID(),
-                    texto: typeof ev.texto === "string" ? ev.texto : "",
-                    fecha,
-                };
-            }),
-        );
-    }
-
-    return [];
 }
 
 function Calendar() {
@@ -120,6 +80,8 @@ function Calendar() {
     );
     const [seleccionado, setSeleccionado] = useState<Date | null>(null);
     const [textoNuevo, setTextoNuevo] = useState("");
+    // Tipo de la tarea que se va a agregar desde el modal
+    const [tipoNuevo, setTipoNuevo] = useState<tipoTarea>("tarea");
 
     const semanas = useMemo(
         () => getWeeks(visible.getFullYear(), visible.getMonth()),
@@ -130,7 +92,7 @@ function Calendar() {
     useEffect(() => {
         if (!seleccionado) return;
         const alPresionar = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setSeleccionado(null);
+            if (e.key === "Escape") cerrarDia();
         };
         window.addEventListener("keydown", alPresionar);
         return () => window.removeEventListener("keydown", alPresionar);
@@ -146,6 +108,12 @@ function Calendar() {
         setTextoNuevo("");
     }
 
+    // Cerrar el modal deja el formulario como al principio
+    function cerrarDia() {
+        setSeleccionado(null);
+        setTipoNuevo("tarea");
+    }
+
     function agregarEvento(e: FormEvent) {
         e.preventDefault();
         const texto = textoNuevo.trim();
@@ -156,9 +124,11 @@ function Calendar() {
                 id: crypto.randomUUID(),
                 texto,
                 fecha: claveDe(seleccionado),
+                tipo: tipoNuevo,
             },
         ]);
         setTextoNuevo("");
+        setTipoNuevo("tarea");
     }
 
     function borrarEvento(id: string) {
@@ -232,7 +202,7 @@ function Calendar() {
                                         {eventosDia.slice(0, 2).map((ev) => (
                                             <span
                                                 key={ev.id}
-                                                className="cal-evento"
+                                                className={`cal-evento${ev.tipo === "examen" ? " cal-evento-examen" : ""}`}
                                             >
                                                 {ev.texto}
                                             </span>
@@ -250,13 +220,19 @@ function Calendar() {
                 )}
             </div>
 
+            <Proximas
+                eventos={eventos}
+                onBorrar={borrarEvento}
+                onAnadir={() => abrirDia(new Date())}
+            />
+
             {/* Flechas para cambiar de mes, debajo del calendario */}
             
 
             {seleccionado && (
                 <div
                     className="cal-modal-fondo"
-                    onClick={() => setSeleccionado(null)}
+                    onClick={cerrarDia}
                 >
                     <div
                         className="cal-modal"
@@ -267,7 +243,7 @@ function Calendar() {
                             <button
                                 type="button"
                                 className="cal-cerrar"
-                                onClick={() => setSeleccionado(null)}
+                                onClick={cerrarDia}
                                 aria-label="Cerrar"
                             >
                                 ×
@@ -281,13 +257,37 @@ function Calendar() {
                                 placeholder="Nuevo evento…"
                                 autoFocus
                             />
+                            {/* Control segmentado Tarea/Examen */}
+                            <div className="cal-tipo">
+                                <button
+                                    type="button"
+                                    className={`cal-tipo-btn${tipoNuevo === "tarea" ? " cal-tipo-btn-activo" : ""}`}
+                                    onClick={() => setTipoNuevo("tarea")}
+                                >
+                                    Tarea
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`cal-tipo-btn${tipoNuevo === "examen" ? " cal-tipo-btn-activo" : ""}`}
+                                    onClick={() => setTipoNuevo("examen")}
+                                >
+                                    Examen
+                                </button>
+                            </div>
                             <button type="submit">Agregar</button>
                         </form>
 
                         {eventosSeleccionado.length > 0 ? (
                             <ul className="cal-lista">
                                 {eventosSeleccionado.map((ev) => (
-                                    <li key={ev.id}>
+                                    <li
+                                        key={ev.id}
+                                        className={
+                                            ev.tipo === "examen"
+                                                ? "cal-evento-examen"
+                                                : ""
+                                        }
+                                    >
                                         <span className="cal-lista-texto">
                                             {ev.texto}
                                         </span>

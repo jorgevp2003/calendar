@@ -1,0 +1,177 @@
+/* Sección "Próximas tareas" bajo el calendario */
+.proximas {
+    margin-top: 24px;
+    text-align: left;
+}
+
+.proximas-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.proximas h2 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.proximas-anadir {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-h);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.proximas-anadir:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+}
+
+.proximas-conteo {
+    margin: 4px 0 12px;
+    font-size: 0.8125rem;
+    color: var(--text);
+}
+
+.proximas-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.proximas-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Cabecera "— Noviembre —" al cambiar de mes */
+.proximas-mes {
+    padding: 10px 0 2px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+}
+
+.proximas-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.proximas-fecha {
+    flex-shrink: 0;
+    min-width: 52px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--accent-bg);
+    color: var(--text-h);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.proximas-badge {
+    flex-shrink: 0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--examen);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.proximas-item-examen {
+    background: var(--examen-bg);
+    border-color: var(--examen-bg);
+}
+
+.proximas-texto {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.875rem;
+    color: var(--text-h);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.proximas-borrar {
+    flex-shrink: 0;
+    padding: 0 2px;
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.proximas-borrar:hover {
+    color: var(--evento-rojo);
+}
+
+/* Marca invisible que dispara la carga por lotes */
+.proximas-fin {
+    height: 1px;
+}
+
+.proximas-vencidas-toggle {
+    width: 100%;
+    margin-top: 12px;
+    padding: 6px 12px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+
+.proximas-vencidas-toggle:hover {
+    background: var(--accent-bg);
+    color: var(--text-h);
+}
+
+.proximas-anadir:focus-visible,
+.proximas-vencidas-toggle:focus-visible,
+.proximas-borrar:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Lista de vencidas: apagada y con el texto tachado */
+.proximas-vencidas {
+    margin-top: 8px;
+    opacity: 0.75;
+}
+
+.proximas-vencidas .proximas-fecha {
+    background: var(--social-bg);
+    color: var(--text);
+}
+
+.proximas-vencidas .proximas-texto {
+    color: var(--text);
+    text-decoration: line-through;
+}
+
+.proximas-vacio {
+    margin: 8px 0;
+    font-size: 0.8125rem;
+    color: var(--text);
+}
