@@ -108,9 +108,8 @@
     min-width: 0;
     font-size: 0.875rem;
     color: var(--text-h);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* El texto sigue por debajo al llegar al borde, en vez de cortarse */
+    overflow-wrap: anywhere;
 }
 
 /* Nivel de importancia 1-3: clic para cambiarlo */

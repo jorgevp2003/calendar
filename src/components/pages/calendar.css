@@ -23,6 +23,8 @@
 }
 
 .cal-dia {
+    /* min-width: 0 para que la celda pueda encoger y el texto largo no descoloque la grilla */
+    min-width: 0;
     min-height: 4.5rem;
     padding: 6px;
     display: flex;
