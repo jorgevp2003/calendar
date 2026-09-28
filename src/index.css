@@ -37,6 +37,10 @@
   --asig-7-bg: #fbe2f0;
   --asig-7-borde: #e391c3;
 
+  /* Días del calendario: lectivo (azul clarito) y no lectivo (verde) */
+  --lectivo-bg: #dce9fd;
+  --nlectivo-bg: #d9f2dd;
+
   font: 20px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -83,6 +87,8 @@
     --asig-6-borde: #7a68b5;
     --asig-7-bg: #3a2438;
     --asig-7-borde: #a05f96;
+    --lectivo-bg: #1f2c44;
+    --nlectivo-bg: #1d332a;
   }
 
   #social .button-icon {

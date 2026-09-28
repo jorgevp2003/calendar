@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import "./calendar.css";
 import { useListaSincronizada } from "../../sesion";
 import { aCalendario, claveDe, type tipoTarea } from "../../tipos-calendario";
+import { esDiaLectivo, festivoDe } from "../../festivos-madrid";
 import { Proximas } from "./proximas";
 
 const MESES = [
@@ -179,10 +180,12 @@ function Calendar() {
                         const eventosDia = eventos.filter(
                             (ev) => ev.fecha === clave,
                         );
+                        const festivo = festivoDe(clave);
                         const clases = [
                             "cal-dia",
                             dia.isCurrentMonth ? "" : "cal-fuera",
                             esMismoDia(dia.date, hoy) ? "cal-hoy" : "",
+                            esDiaLectivo(dia.date) ? "cal-lectivo" : "cal-nlectivo",
                         ]
                             .filter(Boolean)
                             .join(" ");
@@ -193,6 +196,7 @@ function Calendar() {
                                 type="button"
                                 className={clases}
                                 onClick={() => abrirDia(dia.date)}
+                                title={festivo ? `Festivo: ${festivo}` : undefined}
                             >
                                 <span className="cal-numero">
                                     {dia.date.getDate()}

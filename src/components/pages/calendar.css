@@ -54,6 +54,16 @@
     outline-offset: 2px;
 }
 
+/* Día lectivo (lunes a viernes no festivo) en azul clarito; el finde y
+   los festivos de la Comunidad de Madrid en verde */
+.cal-lectivo {
+    background: var(--lectivo-bg);
+}
+
+.cal-nlectivo {
+    background: var(--nlectivo-bg);
+}
+
 /* Días del mes anterior/siguiente que rellenan la grilla */
 .cal-fuera {
     opacity: 0.35;
